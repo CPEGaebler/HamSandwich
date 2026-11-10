@@ -276,6 +276,7 @@ void PlayerGetMonsterPoints(int level);
 void PlayerGetBossPoints(int level);
 
 void PlayerGetExactXP(int amt);
+void PlayerGainSkillPoints(byte num);
 
 void PlayerCalcStats(void);
 void PlayerBackToLastTown(byte *mapNum);
