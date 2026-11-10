@@ -3836,7 +3836,7 @@ void DoChatAction(byte a)
 		case 48:
 			// finish skill quest
 			PlayerSetVar(VAR_QUESTDONE+QUEST_SKILLS,1);
-			player.skillPts+=5;
+			PlayerGainSkillPoints(5);
 			NewMessage("You got 5 Skill Points!",0);
 			break;
 		case 49:

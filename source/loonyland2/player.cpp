@@ -316,8 +316,7 @@ void PlayerSetVar(int v,int val)
 			{
 				char s[32];
 
-				if(player.skillPts<255)
-					player.skillPts++;
+				PlayerGainSkillPoints(1);
 				if(player.skillPts==1)
 					sprintf(s,"You have %d Skill Point.",player.skillPts);
 				else
@@ -466,8 +465,7 @@ byte PlayerGetItem(byte itm,int val1,int val2)
 			{
 				if(ModifierOn(MOD_SKILLBOR))
 				{
-					if(player.skillPts<255)
-						player.skillPts++;
+					PlayerGainSkillPoints(1);
 					if(player.skillPts==1)
 						sprintf(s,"You have %d Skill Point.",player.skillPts);
 					else
@@ -610,12 +608,12 @@ void PlayerLevelUp(void)
 	}
 	else if(ModifierOn(MOD_EVEN))
 	{
-		player.skillPts+=3;
+		PlayerGainSkillPoints(3);
 	}
 	else
 	{
 		sp=(player.level/10)+1;
-		player.skillPts+=sp;
+		PlayerGainSkillPoints(sp);
 	}
 	PlayerCalcStats();
 	sprintf(s,"LEVEL UP! You are level %d.",player.level);
@@ -682,6 +680,14 @@ void PlayerGetExactXP(int amt)
 	NumberParticle2((short)amt,goodguy->x,goodguy->y+1,7,PART_XP);
 	while(player.xp>=player.xpNeed && player.level<50)
 		PlayerLevelUp();
+}
+
+void PlayerGainSkillPoints(byte num)
+{
+	if (player.skillPts<=255-num)
+		player.skillPts+=num;
+	else
+		player.skillPts=255;
 }
 
 void PlayerGetMonsterPoints(int level)
